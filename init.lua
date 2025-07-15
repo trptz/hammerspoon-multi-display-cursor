@@ -1,7 +1,34 @@
 -- Configuration
 local HOTKEY_MODS = { "cmd", "shift", "ctrl" }
 
+-- Store cursor positions for each screen
+local cursorPositions = {}
+
 -- Helper functions
+local function saveCursorPosition(screen)
+  if not screen then return end
+  
+  local screenId = screen:getUUID()
+  local currentPos = hs.mouse.absolutePosition()
+  cursorPositions[screenId] = currentPos
+end
+
+local function restoreCursorPosition(screen)
+  if not screen then return false end
+  
+  local screenId = screen:getUUID()
+  local savedPos = cursorPositions[screenId]
+  
+  if savedPos then
+    hs.mouse.setAbsolutePosition(savedPos)
+    return true
+  else
+    local center = hs.geometry.rectMidPoint(screen:fullFrame())
+    hs.mouse.setAbsolutePosition(center)
+    return false
+  end
+end
+
 local function activateLastAppOnScreen(screen)
   if not screen then return false end
   
@@ -18,11 +45,18 @@ local function activateLastAppOnScreen(screen)
   return false
 end
 
-local function moveToScreenCenter(screen)
+local function moveToScreen(screen)
   if not screen then return false end
   
-  local center = hs.geometry.rectMidPoint(screen:fullFrame())
-  hs.mouse.setAbsolutePosition(center)
+  local currentScreen = hs.mouse.getCurrentScreen()
+  
+  -- Save cursor position on current screen before moving
+  if currentScreen and currentScreen ~= screen then
+    saveCursorPosition(currentScreen)
+  end
+  
+  -- Restore cursor position on target screen
+  restoreCursorPosition(screen)
   
   activateLastAppOnScreen(screen)
   
@@ -40,7 +74,7 @@ local function moveToDisplay(displayNumber)
   local currentScreen = hs.mouse.getCurrentScreen()
   
   if currentScreen ~= targetScreen then
-    moveToScreenCenter(targetScreen)
+    moveToScreen(targetScreen)
   end
 end
 
@@ -49,7 +83,7 @@ local function moveToNextDisplay()
   local next = current:next()
   
   if next and next ~= current then
-    moveToScreenCenter(next)
+    moveToScreen(next)
   end
 end
 
@@ -58,7 +92,7 @@ local function moveToPreviousDisplay()
   local prev = current:previous()
   
   if prev and prev ~= current then
-    moveToScreenCenter(prev)
+    moveToScreen(prev)
   end
 end
 
