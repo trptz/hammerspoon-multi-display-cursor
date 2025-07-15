@@ -1,6 +1,8 @@
-# hammerspoon-multi-display-cursor
+# hammerspoon-multi-display-cursor &middot; [![Lua](https://img.shields.io/badge/Lua-%232C2D72.svg?logo=lua&logoColor=white)](https://www.lua.org/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/trptz/hammerspoon-multi-display-cursor/issues)
 
 Move cursor across multiple displays using keyboard shortcuts.
+
+For Hammerspoon installation and usage, please refer to: https://github.com/Hammerspoon/hammerspoon
 
 ## Features
 
@@ -12,9 +14,11 @@ Move cursor across multiple displays using keyboard shortcuts.
 
 ## Installation
 
+First, install Hammerspoon from https://github.com/Hammerspoon/hammerspoon
+
+Then install this script:
 ```bash
 mkdir -p ~/.hammerspoon
-
 cp init.lua ~/.hammerspoon/
 ```
 
@@ -36,10 +40,6 @@ Edit `init.lua` to:
 - Change hotkey combination (modify `HOTKEY_MODS` variable)
 - Change cursor target position
 - Support more than 9 displays
-
-## License
-
-MIT License
 
 ## Contributing
 
