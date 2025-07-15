@@ -9,6 +9,7 @@ For Hammerspoon installation and usage, please refer to: https://github.com/Hamm
 - `Cmd+Shift+Ctrl+[1-9]` to jump to display 1-9
 - `Cmd+Shift+Ctrl+←/→` to navigate between displays sequentially
 - Cursor moves to center of target display
+- Automatically activates the most recently used window on target display
 - Skips if already on target display
 - Shows alert for non-existent displays
 

@@ -2,11 +2,30 @@
 local HOTKEY_MODS = { "cmd", "shift", "ctrl" }
 
 -- Helper functions
+local function activateLastAppOnScreen(screen)
+  if not screen then return false end
+  
+  local windows = hs.window.orderedWindows()
+  
+  for _, window in ipairs(windows) do
+    if window:screen() == screen and window:isVisible() and window:isStandard() then
+      window:application():activate()
+      window:focus()
+      return true
+    end
+  end
+  
+  return false
+end
+
 local function moveToScreenCenter(screen)
   if not screen then return false end
   
   local center = hs.geometry.rectMidPoint(screen:fullFrame())
   hs.mouse.setAbsolutePosition(center)
+  
+  activateLastAppOnScreen(screen)
+  
   return true
 end
 
