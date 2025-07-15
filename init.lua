@@ -14,7 +14,6 @@ local function moveToDisplay(displayNumber)
   local screens = hs.screen.allScreens()
   
   if displayNumber < 1 or displayNumber > #screens then
-    hs.alert.show("Display " .. displayNumber .. " not found")
     return
   end
   
