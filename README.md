@@ -12,7 +12,6 @@ For Hammerspoon installation and usage, please refer to: https://github.com/Hamm
 - Falls back to center of display if no previous position exists
 - Automatically activates the most recently used window on target display
 - Skips if already on target display
-- Shows alert for non-existent displays
 
 ## Installation
 
